@@ -614,3 +614,61 @@ type LightClientUpdateCapella struct {
 	SyncAggregate           *SyncAggregate            `json:"sync_aggregate"`
 	SignatureSlot           uint64                    `json:"signature_slot"`
 }
+
+// dencun types
+
+type ExecutionPayloadHeaderDencun struct {
+	ParentHash       [32]byte  `json:"parent_hash" ssz-size:"32"`
+	FeeRecipient     [20]byte  `json:"fee_recipient" ssz-size:"20"`
+	StateRoot        [32]byte  `json:"state_root" ssz-size:"32"`
+	ReceiptsRoot     [32]byte  `json:"receipts_root" ssz-size:"32"`
+	LogsBloom        [256]byte `json:"logs_bloom" ssz-size:"256"`
+	PrevRandao       [32]byte  `json:"prev_randao" ssz-size:"32"`
+	BlockNumber      uint64    `json:"block_number"`
+	GasLimit         uint64    `json:"gas_limit"`
+	GasUsed          uint64    `json:"gas_used"`
+	Timestamp        uint64    `json:"timestamp"`
+	ExtraData        []byte    `json:"extra_data" ssz-max:"32"`
+	BaseFeePerGas    Uint256   `json:"base_fee_per_gas" ssz-size:"32"`
+	BlockHash        [32]byte  `json:"block_hash" ssz-size:"32"`
+	TransactionsRoot [32]byte  `json:"transactions_root" ssz-size:"32"`
+	WithdrawalRoot   [32]byte  `json:"withdrawals_root" ssz-size:"32"`
+}
+
+type LightClientHeaderDencun struct {
+	Header          *BeaconBlockHeader            `json:"beacon"`
+	Execution       *ExecutionPayloadHeaderDencun `json:"execution"`
+	ExecutionBranch [4][32]byte                   `json:"execution_branch" ssz-size:"4,32"`
+}
+
+type LightClientBootstrapDencun struct {
+	Header                     *LightClientHeaderDencun `json:"header"`
+	CurrentSyncCommittee       *SyncCommittee           `json:"current_sync_committee"`
+	CurrentSyncCommitteeBranch [][32]byte               `json:"current_sync_committee_branch" ssz-size:"5,32"`
+}
+
+type LightClientOptimisticUpdateDencun struct {
+	AttestedHeader *LightClientHeaderDencun `json:"attested_header"`
+	SyncAggregate  *SyncAggregate           `json:"sync_aggregate"`
+	SignatureSlot  uint64                   `json:"signature_slot"`
+}
+
+type LightClientFinalityUpdateDencun struct {
+	AttestedHeader  *LightClientHeaderDencun `json:"attested_header"`
+	FinalizedHeader *LightClientHeaderDencun `json:"finalized_header"`
+	FinalityBranch  [][32]byte               `json:"finality_branch" ssz-size:"6,32"`
+	SyncAggregate   *SyncAggregate           `json:"sync_aggregate"`
+	SignatureSlot   uint64                   `json:"signature_slot"`
+}
+
+type LightClientUpdateDencun struct {
+	AttestedHeader          *LightClientHeaderDencun `json:"attested_header"`
+	NextSyncCommittee       *SyncCommittee           `json:"next_sync_committee"`
+	NextSyncCommitteeBranch [][32]byte               `json:"next_sync_committee_branch" ssz-size:"5,32"`
+	FinalizedHeader         *LightClientHeaderDencun `json:"finalized_header"`
+	FinalityBranch          [][32]byte               `json:"finality_branch" ssz-size:"6,32"`
+	SyncAggregate           *SyncAggregate           `json:"sync_aggregate"`
+	SignatureSlot           uint64                   `json:"signature_slot"`
+	BlobGasUsed             uint64                   `json:"blob_gas_used"`
+	ExcessBlobGas           uint64                   `json:"excess_blob_gas"`
+}
