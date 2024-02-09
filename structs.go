@@ -615,9 +615,9 @@ type LightClientUpdateCapella struct {
 	SignatureSlot           uint64                    `json:"signature_slot"`
 }
 
-// dencun types
+// Deneb types
 
-type ExecutionPayloadHeaderDencun struct {
+type ExecutionPayloadHeaderDeneb struct {
 	ParentHash       [32]byte  `json:"parent_hash" ssz-size:"32"`
 	FeeRecipient     [20]byte  `json:"fee_recipient" ssz-size:"20"`
 	StateRoot        [32]byte  `json:"state_root" ssz-size:"32"`
@@ -633,42 +633,42 @@ type ExecutionPayloadHeaderDencun struct {
 	BlockHash        [32]byte  `json:"block_hash" ssz-size:"32"`
 	TransactionsRoot [32]byte  `json:"transactions_root" ssz-size:"32"`
 	WithdrawalRoot   [32]byte  `json:"withdrawals_root" ssz-size:"32"`
+	BlobGasUsed      uint64    `json:"blob_gas_used"`
+	ExcessBlobGas    uint64    `json:"excess_blob_gas"`
 }
 
-type LightClientHeaderDencun struct {
-	Header          *BeaconBlockHeader            `json:"beacon"`
-	Execution       *ExecutionPayloadHeaderDencun `json:"execution"`
-	ExecutionBranch [4][32]byte                   `json:"execution_branch" ssz-size:"4,32"`
+type LightClientHeaderDeneb struct {
+	Header          *BeaconBlockHeader           `json:"beacon"`
+	Execution       *ExecutionPayloadHeaderDeneb `json:"execution"`
+	ExecutionBranch [4][32]byte                  `json:"execution_branch" ssz-size:"4,32"`
 }
 
-type LightClientBootstrapDencun struct {
-	Header                     *LightClientHeaderDencun `json:"header"`
-	CurrentSyncCommittee       *SyncCommittee           `json:"current_sync_committee"`
-	CurrentSyncCommitteeBranch [][32]byte               `json:"current_sync_committee_branch" ssz-size:"5,32"`
+type LightClientBootstrapDeneb struct {
+	Header                     *LightClientHeaderDeneb `json:"header"`
+	CurrentSyncCommittee       *SyncCommittee          `json:"current_sync_committee"`
+	CurrentSyncCommitteeBranch [][32]byte              `json:"current_sync_committee_branch" ssz-size:"5,32"`
 }
 
-type LightClientOptimisticUpdateDencun struct {
-	AttestedHeader *LightClientHeaderDencun `json:"attested_header"`
-	SyncAggregate  *SyncAggregate           `json:"sync_aggregate"`
-	SignatureSlot  uint64                   `json:"signature_slot"`
+type LightClientOptimisticUpdateDeneb struct {
+	AttestedHeader *LightClientHeaderDeneb `json:"attested_header"`
+	SyncAggregate  *SyncAggregate          `json:"sync_aggregate"`
+	SignatureSlot  uint64                  `json:"signature_slot"`
 }
 
-type LightClientFinalityUpdateDencun struct {
-	AttestedHeader  *LightClientHeaderDencun `json:"attested_header"`
-	FinalizedHeader *LightClientHeaderDencun `json:"finalized_header"`
-	FinalityBranch  [][32]byte               `json:"finality_branch" ssz-size:"6,32"`
-	SyncAggregate   *SyncAggregate           `json:"sync_aggregate"`
-	SignatureSlot   uint64                   `json:"signature_slot"`
+type LightClientFinalityUpdateDeneb struct {
+	AttestedHeader  *LightClientHeaderDeneb `json:"attested_header"`
+	FinalizedHeader *LightClientHeaderDeneb `json:"finalized_header"`
+	FinalityBranch  [][32]byte              `json:"finality_branch" ssz-size:"6,32"`
+	SyncAggregate   *SyncAggregate          `json:"sync_aggregate"`
+	SignatureSlot   uint64                  `json:"signature_slot"`
 }
 
-type LightClientUpdateDencun struct {
-	AttestedHeader          *LightClientHeaderDencun `json:"attested_header"`
-	NextSyncCommittee       *SyncCommittee           `json:"next_sync_committee"`
-	NextSyncCommitteeBranch [][32]byte               `json:"next_sync_committee_branch" ssz-size:"5,32"`
-	FinalizedHeader         *LightClientHeaderDencun `json:"finalized_header"`
-	FinalityBranch          [][32]byte               `json:"finality_branch" ssz-size:"6,32"`
-	SyncAggregate           *SyncAggregate           `json:"sync_aggregate"`
-	SignatureSlot           uint64                   `json:"signature_slot"`
-	BlobGasUsed             uint64                   `json:"blob_gas_used"`
-	ExcessBlobGas           uint64                   `json:"excess_blob_gas"`
+type LightClientUpdateDeneb struct {
+	AttestedHeader          *LightClientHeaderDeneb `json:"attested_header"`
+	NextSyncCommittee       *SyncCommittee          `json:"next_sync_committee"`
+	NextSyncCommitteeBranch [][32]byte              `json:"next_sync_committee_branch" ssz-size:"5,32"`
+	FinalizedHeader         *LightClientHeaderDeneb `json:"finalized_header"`
+	FinalityBranch          [][32]byte              `json:"finality_branch" ssz-size:"6,32"`
+	SyncAggregate           *SyncAggregate          `json:"sync_aggregate"`
+	SignatureSlot           uint64                  `json:"signature_slot"`
 }
